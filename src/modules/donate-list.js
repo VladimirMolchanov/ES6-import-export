@@ -7,8 +7,8 @@ class DonateList {
         this.#donates = donates
     }
 
-    #_createListDonates() {
-        return this.#donates.map(donate => {
+    #_createListDonates(donates = this.#donates) {
+        return donates.map(donate => {
             return `
                 <div class="donate-item">
                     ${donate.date} - <b>${donate.amount}$</b>
@@ -24,6 +24,15 @@ class DonateList {
                  ${this.#_createListDonates()}
             </div>
         </div>`
+    }
+
+    updateDonates(updatedDonates) {
+        const $list = document.querySelector('.donates-container__donates')
+        $list.innerHTML = this.#_createListDonates(updatedDonates)
+    }
+
+    initEventListeners() {
+
     }
 
     render() {
