@@ -1,3 +1,5 @@
+import { Settings as settings } from '../core/constants/settings'
+
 class DonateForm {
     #$el
     #totalAmount
@@ -12,9 +14,9 @@ class DonateForm {
     #_tempalate() {
         return `
         <form class="donate-form">
-            <h1 id="total-amount">${this.#totalAmount}$</h1>
+            <h1 id="total-amount">${this.#totalAmount}${settings.currency}</h1>
             <label class="donate-form__input-label"> 
-                    Введите сумму в $
+                    Введите сумму в ${settings.currency}
                     <input class="donate-form__donate-input" name="amount" type="number" max="100" min="0" required="">
             </label>
             <button class="donate-form__submit-button" type="submit"> 
@@ -25,7 +27,7 @@ class DonateForm {
 
     updateTotalAmount(newAmount) {
         const $totalAmount = document.querySelector('#total-amount')
-        $totalAmount.innerHTML = newAmount + '$'
+        $totalAmount.innerHTML = newAmount + settings.currency
     }
 
     render() {

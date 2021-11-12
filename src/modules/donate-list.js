@@ -1,3 +1,5 @@
+import { Settings as settings } from '../core/constants/settings'
+
 class DonateList {
     #donates
     #$el
@@ -11,7 +13,7 @@ class DonateList {
         return donates.map(donate => {
             return `
                 <div class="donate-item">
-                    ${donate.date} - <b>${donate.amount}$</b>
+                    ${donate.date} - <b>${donate.amount}${settings.currency}</b>
                 </div>`
         }).join('')
     }
