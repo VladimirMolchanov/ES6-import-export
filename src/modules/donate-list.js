@@ -1,11 +1,9 @@
 import { Settings as settings } from '../core/constants/settings'
+import * as utils from '../core/utils'
 
 class DonateList {
     #donates
-    #$el
     constructor(donates) {
-        this.#$el = document.createElement('div')
-        this.#$el.id = `DonateList-${Date.now()}`
         this.#donates = donates
     }
 
@@ -13,7 +11,7 @@ class DonateList {
         return donates.map(donate => {
             return `
                 <div class="donate-item">
-                    ${donate.date} - <b>${donate.amount}${settings.currency}</b>
+                    ${utils.getFormattedTime(donate.date)} - <b>${donate.amount}${settings.currency}</b>
                 </div>`
         }).join('')
     }
@@ -38,8 +36,7 @@ class DonateList {
     }
 
     render() {
-        this.#$el.innerHTML = this.#_tempalate()
-        return this.#$el
+        return this.#_tempalate()
     }
 }
 

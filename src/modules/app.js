@@ -1,5 +1,6 @@
 import { DonateForm } from './donate-form'
 import { DonateList } from './donate-list'
+import * as utils from '../core/utils';
 
 const mockDonates = [
     { amount: 4, date: new Date() },
@@ -9,15 +10,12 @@ const mockDonates = [
 ];
 
 export default class App {
-    #$el
     #components
     #state
     constructor() {
-        this.#$el = document.createElement('div')
-        this.#$el.id = `App`
         this.#state = {
-            donates: [],
-            totalAmount: 0
+            donates: mockDonates,
+            totalAmount: utils.calculateSumOfNumbers(mockDonates.map(el => el.amount))
         }
         this.#components = [
             new DonateForm(this.#state.totalAmount, this.createNewDonate.bind(this)), 
@@ -34,11 +32,18 @@ export default class App {
     }
 
     run() {
+        // this.#components.forEach(component => {
+        //     this.#$el.append(component.render())
+        // })
+
+        // document.body.append(this.#$el)
+
+        let html = ''
         this.#components.forEach(component => {
-            this.#$el.append(component.render())
+            html += component.render()
         })
 
-        document.body.append(this.#$el)
+        document.body.innerHTML = html
 
         this.#components.forEach(component => {
             component.initEventListeners()
