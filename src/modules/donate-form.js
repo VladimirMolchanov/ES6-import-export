@@ -1,12 +1,9 @@
 import { Settings as settings } from '../core/constants/settings'
 
 class DonateForm {
-    #$el
     #totalAmount
     #createNewDonate
     constructor(totalAmount, createNewDonate) {
-        this.#$el = document.createElement('div')
-        this.#$el.id = `DonateForm-${Date.now()}`
         this.#totalAmount = totalAmount
         this.#createNewDonate = createNewDonate
     }
@@ -31,8 +28,7 @@ class DonateForm {
     }
 
     render() {
-        this.#$el.innerHTML = this.#_tempalate()
-        return this.#$el
+        return this.#_tempalate()
     }
 
     initEventListeners() {
